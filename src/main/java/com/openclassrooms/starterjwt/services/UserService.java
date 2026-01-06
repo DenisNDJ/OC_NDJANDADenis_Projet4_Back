@@ -12,6 +12,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public void save(User user) {
+        this.userRepository.save(user);
+    }
+    
     public void delete(Long id) {
         this.userRepository.deleteById(id);
     }
@@ -19,4 +23,13 @@ public class UserService {
     public User findById(Long id) {
         return this.userRepository.findById(id).orElse(null);
     }
+    
+    public User findByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElse(null);
+    }
+    
+    public boolean existsByEmail(String email) {
+    	return this.userRepository.findByEmail(email).isPresent();
+    }
+  
 }
