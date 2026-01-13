@@ -1,10 +1,13 @@
-package com.openclassroom.starterjwt;
+package com.openclassrooms.starterjwt;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+
 import com.openclassrooms.starterjwt.configuration.AppConfig;
 
-@SpringBootTest(classes = {AppConfig.class})
+@SpringBootTest
+@ActiveProfiles("test")
 public class SpringBootSecurityJwtApplicationTest {
 	
 	@Test
