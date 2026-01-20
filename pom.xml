@@ -102,7 +102,6 @@
 		    <artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
-
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -144,6 +143,14 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com.openclassrooms.starterjwt.configuration</exclude>
+                        <exclude>com.openclassrooms.starterjwt.dto</exclude>
+                        <exclude>com.openclassrooms.starterjwt/mapper</exclude>
+                        <exclude>com.openclassrooms.starterjwt.models</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

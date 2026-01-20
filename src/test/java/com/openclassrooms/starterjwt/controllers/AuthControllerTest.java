@@ -2,11 +2,12 @@ package com.openclassrooms.starterjwt.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.openclassrooms.starterjwt.payload.request.LoginRequest;
+import com.openclassrooms.starterjwt.payload.request.SignupRequest;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,15 +19,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @ActiveProfiles("test")
-//@AutoConfigureMockMvc
+@DirtiesContext(classMode = ClassMode.BEFORE_CLASS)
+@AutoConfigureMockMvc
 public class AuthControllerTest {
-	
-	@Test
-	public void contextLoad() {
-		
-	}
-	//Class test under comment until issue fixed
-	/*@Autowired
+	@Autowired
     private MockMvc mockMvc;	
     
     private ObjectMapper objectMapper = new ObjectMapper();    
@@ -44,7 +40,7 @@ public class AuthControllerTest {
         	.andExpect(status().isOk())
 	        .andExpect(jsonPath("$.firstName").value("Admin"))
 	        .andExpect(jsonPath("$.lastName").value("Admin"))
-	        .andExpect(jsonPath("$.email").value("yoga@studio.com"))
+	        .andExpect(jsonPath("$.username").value("yoga@studio.com"))
 	        .andExpect(jsonPath("$.admin").value(true));
 	}
     
@@ -90,6 +86,6 @@ public class AuthControllerTest {
 	               .characterEncoding("utf-8")
 	               .content(objectMapper.writeValueAsString(signupRequest)))
 	               .andExpect(status().isBadRequest());
-	}*/
+	}
 
 }
