@@ -134,3 +134,13 @@ La documentation de Postman se trouve ici :
 
 https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman
 "# OC_NDJANDADenis_Projet4_Back" 
+
+## Test Coverage
+
+Commande tests:
+> mvn test
+
+Fichier rapport: 
+>Testez-et-am-liorez-une-application-full-stack\back\target\site\jacoco\index.html
+
+![alt text](image.png)
