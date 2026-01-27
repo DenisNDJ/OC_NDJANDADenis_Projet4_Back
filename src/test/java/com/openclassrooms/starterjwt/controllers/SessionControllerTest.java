@@ -49,8 +49,6 @@ public class SessionControllerTest {
 	private ObjectMapper objectMapper = new ObjectMapper();
 	
 	String mockAuthorization;
-
-	private Teacher mockTeacher = new Teacher(4L, "ATREIDIS", "Paul" , null, null);
 	
 	private User mockUser = new User(1L,
 								"yoga@studio.com",
@@ -89,12 +87,12 @@ public class SessionControllerTest {
     	        .header("Authorization", mockAuthorization))
             	.andExpect(status().isNotFound());
         
-        mockMvc.perform(get("/api/session/1")
+        mockMvc.perform(get("/api/session/11")
             	.contentType(MediaType.APPLICATION_JSON)
     	        .characterEncoding("utf-8")
     	        .header("Authorization", mockAuthorization))
             	.andExpect(status().isOk())
-    	        .andExpect(jsonPath("$.id").value(1))
+    	        .andExpect(jsonPath("$.id").value(11))
     	        .andExpect(jsonPath("$.name").value("Yoga du soir"))
     	        .andExpect(jsonPath("$.description").value("le yoga du soir"))
     	        .andExpect(jsonPath("$.teacher_id").value(1));
@@ -123,15 +121,15 @@ public class SessionControllerTest {
 	    
 	@Test
 	public void updateSession() throws Exception {
+		SessionDto mockSession = new SessionDto(null, "Yoga des poules",new Date(),(long)2,"le Yoga des poules",null,null,null);
+		mockSession.setId(11L);
 		objectMapper.registerModule(new JavaTimeModule());
 		
-		Session mockSession = new Session(1L, "Yoga du volcan", new Date(), "le yoga du volcan",mockTeacher , null, null, null);
-		
-		MvcResult mockResponse = mockMvc.perform(put("/api/session/1")
+		MvcResult mockResponse = mockMvc.perform(put("/api/session/11")
 								.contentType(MediaType.APPLICATION_JSON)
 								.characterEncoding("utf-8")
 								.header("Authorization", mockAuthorization)
-								.content(objectMapper.writeValueAsString(sessionMapper.toDto(mockSession))))
+								.content(objectMapper.writeValueAsString(mockSession)))
 								.andExpect(status().isOk())
 								.andReturn();
 		
@@ -146,17 +144,24 @@ public class SessionControllerTest {
 	
 	@Test
 	public void deleteSessionById() throws Exception {        
-        mockMvc.perform(delete("/api/session/2")
+        mockMvc.perform(delete("/api/session/999")
+            	.contentType(MediaType.APPLICATION_JSON)
+    	        .characterEncoding("utf-8")
+    	        .header("Authorization", mockAuthorization))
+            	.andExpect(status().isNotFound()); 
+        
+        mockMvc.perform(delete("/api/session/12")
             	.contentType(MediaType.APPLICATION_JSON)
     	        .characterEncoding("utf-8")
     	        .header("Authorization", mockAuthorization))
             	.andExpect(status().isOk());
 	}
 	
-	/*@Test
+	@Test
 	public void createSession() throws Exception {
+		Teacher mockTeacher = new Teacher(4L, "ATREIDIS", "Paul" , null, null);
 		objectMapper.registerModule(new JavaTimeModule());
-		Session mockSession = new Session((long)10,
+		Session mockSession = new Session(
 									"Yoga du volcan",
 									new Date(),
 									"le yoga du volcan",mockTeacher ,
@@ -171,7 +176,7 @@ public class SessionControllerTest {
 				    	        .header("Authorization", mockAuthorization))
 				            	.andExpect(status().isOk())
 				            	.andReturn();
-	}*/
+	}
 	
 	@Test
 	public void participate() throws Exception {

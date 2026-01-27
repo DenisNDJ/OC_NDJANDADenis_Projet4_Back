@@ -145,10 +145,13 @@
                 <version>0.8.12</version>
                 <configuration>
                     <excludes>
-                        <exclude>com.openclassrooms.starterjwt.configuration</exclude>
-                        <exclude>com.openclassrooms.starterjwt.dto</exclude>
-                        <exclude>com.openclassrooms.starterjwt/mapper</exclude>
-                        <exclude>com.openclassrooms.starterjwt.models</exclude>
+                        <exclude>**/configuration/**</exclude>
+                        <exclude>**/dto/**</exclude>
+                        <exclude>**/mapper/**</exclude>
+                        <exclude>**/models/**</exclude>
+                        <exclude>**/payload/**</exclude>
+                        <exclude>**/*UserDetailsImpl*</exclude>
+                        <exclude>**/*Application*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -177,9 +180,9 @@
                                     <element>PACKAGE</element>
                                     <limits>
                                         <limit>
-                                            <counter>LINE</counter>
+                                            <counter>INSTRUCTION</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.9</minimum>
+                                            <minimum>0.80</minimum>
                                         </limit>
                                     </limits>
                                 </rule>

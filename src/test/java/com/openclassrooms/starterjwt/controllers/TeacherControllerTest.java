@@ -57,6 +57,12 @@ public class TeacherControllerTest {
 	public void getTeacherbyId() throws Exception {
 		String mockAuthorization = setupTokenAuth();
         
+        mockMvc.perform(get("/api/teacher/999")
+            	.contentType(MediaType.APPLICATION_JSON)
+    	        .characterEncoding("utf-8")
+    	        .header("Authorization", mockAuthorization))
+            	.andExpect(status().isNotFound());
+        
         mockMvc.perform(get("/api/teacher/1")
             	.contentType(MediaType.APPLICATION_JSON)
     	        .characterEncoding("utf-8")

@@ -10,6 +10,6 @@ VALUES (1, 'Paul', 'ATREIDIS'),
        (4, 'Sam', 'SOMG');
 
 INSERT INTO SESSIONS (id, name, description, date, teacher_id)
-VALUES 	(1, 'Yoga du soir', 'le yoga du soir', '2026-01-01', 1),
-		(2, 'Yoga du matin', 'le yoga du matin', '2026-02-02', 2),
-		(3, 'Veneration du sol', 'la veneration du sol', '2026-03-03', 3);
+VALUES 	(11, 'Yoga du soir', 'le yoga du soir', '2026-01-01', 1),
+		(12, 'Yoga du matin', 'le yoga du matin', '2026-02-02', 2),
+		(13, 'Veneration du sol', 'la veneration du sol', '2026-03-03', 3);

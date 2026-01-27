@@ -50,6 +50,12 @@ public class UserControllerTest {
 	public void getUserbyId() throws Exception {
 		String mockAuthorization = setupTokenAuth();
         
+        mockMvc.perform(get("/api/user/999")
+            	.contentType(MediaType.APPLICATION_JSON)
+    	        .characterEncoding("utf-8")
+    	        .header("Authorization", mockAuthorization))
+            	.andExpect(status().isNotFound());
+        
         mockMvc.perform(get("/api/user/1")
             	.contentType(MediaType.APPLICATION_JSON)
     	        .characterEncoding("utf-8")
@@ -64,6 +70,12 @@ public class UserControllerTest {
 	@Test
 	public void deleteUserById() throws Exception {
 		String mockAuthorization = setupTokenAuth();
+        
+        mockMvc.perform(delete("/api/user/999")
+            	.contentType(MediaType.APPLICATION_JSON)
+    	        .characterEncoding("utf-8")
+    	        .header("Authorization", mockAuthorization))
+            	.andExpect(status().isNotFound());
         
         mockMvc.perform(delete("/api/user/1")
             	.contentType(MediaType.APPLICATION_JSON)

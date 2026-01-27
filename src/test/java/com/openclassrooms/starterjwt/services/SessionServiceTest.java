@@ -22,6 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.openclassrooms.starterjwt.exception.BadRequestException;
 import com.openclassrooms.starterjwt.exception.NotFoundException;
 import com.openclassrooms.starterjwt.models.Session;
 import com.openclassrooms.starterjwt.models.Teacher;
@@ -97,8 +98,7 @@ public class SessionServiceTest {
 			teacher1,
 			participants,
 			LocalDateTime.now(),
-			LocalDateTime.now());
-	
+			LocalDateTime.now());	
 	
 	List<Session> sessions = new ArrayList<Session>();
 	
@@ -207,6 +207,18 @@ public class SessionServiceTest {
 	}		
 	
 	@Test
+	@DisplayName("Add user to session participant but already participating")
+	void alreadyParticipateSession() {
+		when(sessionRepository.findById((long)1)).thenReturn(Optional.of(session1));
+		when(userRepository.findById((long)3)).thenReturn(Optional.of(user3));
+		
+		assertThrows(BadRequestException.class, ()->{
+			sessionService.participate((long)1,(long)3);
+			sessionService.participate((long)1,(long)3);
+		});
+	}	
+	
+	@Test
 	@DisplayName("Remove user from session participant")
 	void noLongerParticipate() {
 		when(sessionRepository.findById((long)1)).thenReturn(Optional.of(session1));
@@ -216,6 +228,21 @@ public class SessionServiceTest {
 		
 		verify(sessionRepository, times(1)).findById((long)1);
 		verify(sessionRepository, times(1)).save(session1);
+	}		
+	
+	@Test
+	@DisplayName("Failed remove user from session participant")
+	void noLongerParticipateFailed() {
+		when(sessionRepository.findById((long)1)).thenReturn(Optional.of(session1));
+		when(sessionRepository.save(session1)).thenReturn(session1);
+		
+		assertThrows(BadRequestException.class, ()->{
+			sessionService.noLongerParticipate((long)1,(long)1);
+			sessionService.noLongerParticipate((long)1,(long)1);
+		});		
+		assertThrows(NotFoundException.class, ()->{
+			sessionService.noLongerParticipate((long)11,(long)1);
+		});
 	}	
 
 }

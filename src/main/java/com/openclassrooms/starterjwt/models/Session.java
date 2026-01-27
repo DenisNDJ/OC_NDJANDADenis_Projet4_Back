@@ -42,6 +42,16 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class Session {
+	
+	public Session(String name, Date date,String description, Teacher teacher, List<User> users, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		this.name=name;
+		this.description=description;
+		this.date = date;
+		this.teacher = teacher;
+		this.users=users;
+		this.createdAt=createdAt;
+		this.updatedAt=updatedAt;	
+	}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
